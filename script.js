@@ -1,27 +1,27 @@
 var questionsArray = [
     {
-        text: "What is 1 + 1?",
-        choice1: "5",
-        choice2: "2",
-        choice3: "3",
-        choice4: "4",
-        correct: "2"
+        text: "Commonly used data types DO NOT include:",
+        choice1: "A. strings",
+        choice2: "B. booleans",
+        choice3: "C. alerts",
+        choice4: "D. numbers",
+        correct: "B. booleans"
     },
     {
-        text: "What is 2 + 1?",
-        choice1: "5",
-        choice2: "2",
-        choice3: "3",
-        choice4: "4",
-        correct: "3"
+        text: "The condition in an if/else statement is enclosed with: ",
+        choice1: "A. quotes",
+        choice2: "B. curly brackets",
+        choice3: "C. parenthesis",
+        choice4: "D. square brackets",
+        correct: "C. parenthesis"
     },
     {
-        text: "What is 4 + 1?",
-        choice1: "5",
-        choice2: "2",
-        choice3: "3",
-        choice4: "4",
-        correct: "5"
+        text: "Arrays in JavaScript can be used to store: ",
+        choice1: "A. numbers and strings",
+        choice2: "B. other arrays",
+        choice3: "C. booleans",
+        choice4: "D. all of the above",
+        correct: "D. all of the above"
     }
 ]
 
@@ -35,8 +35,7 @@ function startQuiz () {
    questionContainerEl.style.display = "block";
    startContainerEl.style.display = "none";
 
-   // start the timer
-   startimer();
+   startTimer();
 
    displayQuestion();
 }
@@ -57,9 +56,16 @@ function checkAnswer () {
 
 }
 
-function startimer() {
-
-}
+function startTimer() {
+    var sec = 30;
+    var timer = setInterval(function() {
+        document.getElementById('timerDisplay').innerHTML='00:' + sec;
+        sec--;
+        if (sec < 0) {
+            clearInterval(timer);
+        }
+    }, 1000);
+};
 
 function displayQuestion () {
     var questionEl = document.querySelector("#question");

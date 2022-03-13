@@ -1,3 +1,89 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: rgb(224, 190, 139);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
 #question-container {
     display: none;
+}
+
+nav {
+    padding: 20px 35px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    position: sticky;
+    position: -webkit-sticky;
+}
+
+nav h3 {
+    font-size: 25px;
+    color:rgb(48, 65, 33);
+}
+
+#timerDisplay {
+    font-weight: bolder;
+    font-size: 25px;
+    color: white;
+}
+
+#start-container {
+    padding: 60px 100px;
+    text-align: center;
+}
+
+#start-container h1 {
+    color: brown;
+    padding-bottom: 10px;
+    text-decoration: underline;
+    font-size: 50px;
+}
+
+#start-container p {
+    color: rgb(48, 65, 33);
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#start-button {
+    color: black;
+    background-color: rgb(236, 225, 72);
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+#start-button:hover {
+    background-color: brown;
+}
+
+#question-container {
+    padding: 60px 100px;
+}
+
+#question {
+    padding: 20px;
+    color:brown;
+    text-decoration: underline;
+    font-size: 40px;
+}
+
+#question-container ul {
+    list-style-type: none;
+}
+
+#button1, #button2, #button3, #button4 {
+    color: black;
+    background-color: rgb(236, 225, 72);
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 10px;
+    margin: 5px;
+}
+
+#button1:hover, #button2:hover, #button3:hover, #button4:hover {
+    background-color:brown;
 }
