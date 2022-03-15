@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>Code Quiz!</title>
 </head>
 <body>
     <nav>
         <h3>View high scores</h3>
-        <p id="timerDisplay">Timer 30</p>
+        <p id="timerDisplay">Timer: 30</p>
     </nav>
 
     <div id="start-container">
@@ -37,7 +37,13 @@
             </li>
         </ul>
         <hr/>
-        <h3>Wrong!</h3>
+        <h3 id="message"></h3>
+    </div>
+
+    <div id="score-submit">
+        <h2>Your Score Is: <span id="user-score"></span></h2>
+        <input type="text" name="user-name" id="user-name">
+        <button id="save-btn">Submit</button>
     </div>
     <script src="script.js"></script>  
 </body>

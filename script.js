@@ -1,3 +1,6 @@
+var sec = 30;
+var timer;
+
 var questionsArray = [
     {
         text: "Commonly used data types DO NOT include:",
@@ -22,6 +25,22 @@ var questionsArray = [
         choice3: "C. booleans",
         choice4: "D. all of the above",
         correct: "D. all of the above"
+    },
+    {
+        text: "Values must be enclosed within ______ when being assigned to variables.",
+        choice1: "A. commas",
+        choice2: "B. curly brackets",
+        choice3: "C. quotes",
+        choice4: "D. parenthesis",
+        correct: "B. curly brackets"
+    },
+    {
+        text: "A very useful tool used during development and debugging for printing content to the debugger is:",
+        choice1: "A. JavaScript",
+        choice2: "B. terminal/bash",
+        choice3: "C. for loops",
+        choice4: "D. console.log",
+        correct: "C. for loops"
     }
 ]
 
@@ -40,28 +59,65 @@ function startQuiz () {
    displayQuestion();
 }
 
-function nextQuestion () {
+function endQuiz() {
+    var scoreSubmitEl = document.querySelector("#score-submit");
+    var userScoreEl = document.querySelector("#user-score");
+    var saveScoreEl = document.querySelector("#save-btn");
+
+    saveScoreEl.addEventListener("click", saveScore)
+    userScoreEl.textContent = sec;
+    scoreSubmitEl.style.display = "block";
+    questionContainerEl.style.display = "none";
+}
+
+function saveScore () {
+    var userNameEl = document.querySelector("#user-name");
+
+    localStorage.setItem(userNameEl.value, sec);
+
+    // call the function to display all scores
 
 
-    // check the correct answer
-    checkAnswer();
+}
 
+function nextQuestion (event) {
+    checkAnswer(event);
+   
+    console.log(controlNumber)
+    if (controlNumber < questionsArray.length-1) {
+       // check the correct answe
 
     // controlNumber = controlNumber + 1;
     controlNumber++;
-    displayQuestion()
+    displayQuestion() 
+    } else {
+        clearInterval(timer);
+        endQuiz();
+    }
+    
 }
 
-function checkAnswer () {
+function checkAnswer (event) {
+    var userAnswer = event.target.textContent;
+    var correctAnswer = questionsArray[controlNumber].correct
+    console.log(userAnswer +" vs " + correctAnswer)
+    var messageEl = document.querySelector("#message");
 
+    if (userAnswer === correctAnswer) {
+        messageEl.textContent = "Correct!";
+    } else {
+        sec = sec-10;
+        messageEl.textContent = "Wrong";
+    }
 }
 
 function startTimer() {
-    var sec = 30;
-    var timer = setInterval(function() {
-        document.getElementById('timerDisplay').innerHTML='00:' + sec;
+    timer = setInterval(function() {
+        document.getElementById('timerDisplay').innerHTML='Timer: ' + sec;
         sec--;
         if (sec < 0) {
+            sec = 0;
+            document.getElementById('timerDisplay').innerHTML='Timer: ' + sec;
             clearInterval(timer);
         }
     }, 1000);
@@ -87,3 +143,6 @@ function displayQuestion () {
 }
 
 startButtonEl.addEventListener("click", startQuiz)
+
+
+

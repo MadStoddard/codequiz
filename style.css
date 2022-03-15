@@ -10,6 +10,10 @@
     display: none;
 }
 
+#score-submit {
+    display: none;
+}
+
 nav {
     padding: 20px 35px;
     display: flex;
