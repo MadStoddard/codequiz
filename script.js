@@ -1,5 +1,9 @@
 var sec = 30;
 var timer;
+var scoreSubmitEl = document.querySelector("#score-submit");
+var userScoreEl = document.querySelector("#user-score");
+var saveScoreEl = document.querySelector("#save-btn");
+var displayScreen = document.querySelector("#display-screen");
 
 var questionsArray = [
     {
@@ -59,26 +63,73 @@ function startQuiz () {
    displayQuestion();
 }
 
-function endQuiz() {
-    var scoreSubmitEl = document.querySelector("#score-submit");
-    var userScoreEl = document.querySelector("#user-score");
-    var saveScoreEl = document.querySelector("#save-btn");
+function showScores () {
+    questionContainerEl.style.display = "none";
+    startContainerEl.style.display = "none";
+}
 
+  
+function displayScore () {
+    
+    // var displayScreen = document.querySelector("#past-score");
+    displayScreen.style.display = "block";
+};
+
+
+function endQuiz() {
     saveScoreEl.addEventListener("click", saveScore)
     userScoreEl.textContent = sec;
     scoreSubmitEl.style.display = "block";
     questionContainerEl.style.display = "none";
-}
+
+    displayScore();
+};
+
+var allScores = JSON.parse(localStorage.getItem("allScores") || "[]");
 
 function saveScore () {
     var userNameEl = document.querySelector("#user-name");
 
-    localStorage.setItem(userNameEl.value, sec);
+    // localStorage.setItem(userNameEl.value, sec);
 
-    // call the function to display all scores
+    // localStorage.getItem(userNameEl.value, sec);
+    
+    allScores.push(
+        {
+            name:userNameEl.value,
+            score:sec
+        }
+    );
+
+    localStorage.setItem("allScores", JSON.stringify(allScores));
+
+    viewHighScores();
+   
+};
 
 
-}
+
+var scoreContainer = document.querySelector("#past-scores-container");
+var listOfScores = document.querySelector("#scores-list");
+
+function viewHighScores () {
+    
+    for (var i=0; i < allScores.length; i++) {
+        var thisScore = document.createElement("li");
+        thisScore.textContent = `${allScores[i].name}: ${allScores[i].score}`
+        listOfScores.appendChild(thisScore);
+    };
+
+    // tryAgainBtn.addEventListener("click", reset);
+
+};
+
+var fullReset = document.getElementById('fullReset');
+
+fullReset.addEventListener('click', function(e) {
+    location.reload();
+}, false);
+
 
 function nextQuestion (event) {
     checkAnswer(event);
@@ -104,10 +155,10 @@ function checkAnswer (event) {
     var messageEl = document.querySelector("#message");
 
     if (userAnswer === correctAnswer) {
-        messageEl.textContent = "Correct!";
+        messageEl.textContent = "Correct! You are a master coder!";
     } else {
-        sec = sec-10;
-        messageEl.textContent = "Wrong";
+        sec = sec-3;
+        messageEl.textContent = "Wrong! Three Seconds deducted.";
     }
 }
 
@@ -122,6 +173,12 @@ function startTimer() {
         }
     }, 1000);
 };
+
+function displayHighScores () {
+    highScores.addEventListener("click", viewHighScores);
+}
+
+displayHighScores();
 
 function displayQuestion () {
     var questionEl = document.querySelector("#question");
